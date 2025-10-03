@@ -4,12 +4,20 @@ import argparse
 
 import numpy as np
 from kyupy import bench, log, logic
-import time
+import datetime
 
-def log (str):
+#setting time to Japan time (UTC+9)
+jpTime=datetime.datetime.now(datetime.timezone(datetime.timedelta(hours=9)))
+#when testing started
+t0=jpTime.now()
+
+
+def log (msg:str):
     """
     for logging system and debugging purposes
     """
+    delta=jpTime.now()-t0 #show the running time
+    print(f'{delta}...{msg}')
 
 def main():
 
@@ -37,4 +45,6 @@ def main():
     log.info(f'FaultCoverage {fault_count_detected/fault_count_total*100:.2f}%')
 
 if __name__ == '__main__':
+    
+    print(f'Testing starting at: {t0}')
     main()
