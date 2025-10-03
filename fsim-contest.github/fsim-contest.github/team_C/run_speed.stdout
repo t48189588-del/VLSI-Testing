@@ -1,0 +1,45 @@
+# 00000.002 - Loading bench & tests...
+# 00000.004 - Circuit {name: "c17.bench", cells: 6, forks: 3, lines: 11, io_nodes: 7}
+# 00000.004 - TestDataShape (100, 5)
+# 00000.004 - Total possible faults: 22
+# 00000.004 - Performing fault simulation...
+# 00000.004 - TotalFaults 22
+# 00000.004 - DetectedFaults 22
+# 00000.004 - FaultCoverage 100.00%
+# 00000.004 - Detected list -> data.nogit/c17.detected.txt
+# 00000.002 - Loading bench & tests...
+# 00000.003 - Circuit {name: "c432.bench", cells: 160, forks: 89, lines: 196, io_nodes: 43}
+# 00000.003 - TestDataShape (100, 36)
+# 00000.003 - Total possible faults: 392
+# 00000.003 - Performing fault simulation...
+# 00000.249 - TotalFaults 392
+# 00000.249 - DetectedFaults 377
+# 00000.249 - FaultCoverage 96.17%
+# 00000.249 - Detected list -> data.nogit/c432.detected.txt
+# 00000.002 - Loading bench & tests...
+# 00000.003 - Circuit {name: "c499.bench", cells: 202, forks: 59, lines: 243, io_nodes: 73}
+# 00000.003 - TestDataShape (100, 41)
+# 00000.003 - Total possible faults: 486
+# 00000.003 - Performing fault simulation...
+# 00000.377 - TotalFaults 486
+# 00000.377 - DetectedFaults 452
+# 00000.377 - FaultCoverage 93.00%
+# 00000.378 - Detected list -> data.nogit/c499.detected.txt
+# 00000.002 - Loading bench & tests...
+# 00000.003 - Circuit {name: "c880.bench", cells: 383, forks: 125, lines: 443, io_nodes: 86}
+# 00000.003 - TestDataShape (100, 60)
+# 00000.003 - Total possible faults: 886
+# 00000.003 - Performing fault simulation...
+# 00001.074 - TotalFaults 886
+# 00001.074 - DetectedFaults 831
+# 00001.074 - FaultCoverage 93.79%
+# 00001.074 - Detected list -> data.nogit/c880.detected.txt
+# 00000.002 - Loading bench & tests...
+# 00000.003 - Circuit {name: "c1355.bench", cells: 546, forks: 259, lines: 587, io_nodes: 73}
+# 00000.003 - TestDataShape (100, 41)
+# 00000.003 - Total possible faults: 1174
+# 00000.003 - Performing fault simulation...
+# 00002.240 - TotalFaults 1174
+# 00002.240 - DetectedFaults 1089
+# 00002.240 - FaultCoverage 92.76%
+# 00002.240 - Detected list -> data.nogit/c1355.detected.txt

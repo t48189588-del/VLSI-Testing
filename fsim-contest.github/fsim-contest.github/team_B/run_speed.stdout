@@ -1,0 +1,30 @@
+# File: bench=data.nogit/c17.bench tests=data.nogit/c17.tests
+# Lines: 18
+# Faults: 36
+# Detected: 36 / 36 (100.00%)
+# Time: 0.001 s
+==========================================================================================
+# File: bench=data.nogit/c432.bench tests=data.nogit/c432.tests
+# Lines: 496
+# Faults: 992
+# Detected: 918 / 992 (92.54%)
+# Time: 0.025 s
+==========================================================================================
+# File: bench=data.nogit/c499.bench tests=data.nogit/c499.tests
+# Lines: 610
+# Faults: 1220
+# Detected: 1056 / 1220 (86.56%)
+# Time: 0.033 s
+==========================================================================================
+# File: bench=data.nogit/c880.bench tests=data.nogit/c880.tests
+# Lines: 1112
+# Faults: 2224
+# Detected: 2009 / 2224 (90.33%)
+# Time: 0.054 s
+==========================================================================================
+# File: bench=data.nogit/c1355.bench tests=data.nogit/c1355.tests
+# Lines: 1610
+# Faults: 3220
+# Detected: 2804 / 3220 (87.08%)
+# Time: 0.127 s
+==========================================================================================
