@@ -19,6 +19,16 @@ def log (msg:str):
     delta=jpTime.now()-t0 #show the running time
     print(f'{delta}...{msg}')
 
+def logic_gate(gate:str, inputs:list):
+    '''
+    defining the logic gate functioning
+    :param str gate: NOR, AND, NAND,OR,NOR,XOR,XNOR
+    :param list inputs: defines the inputs for the gate [A,B,C...], the number of elements in the function will determine the amount of pins for the logic gate.EXCEPT for NOT gates it will take ONLY the first element
+    '''
+    #AND gate= multiplication
+    #OR gate= addition
+    #NOT gate= addition without overflow
+
 def main():
 
     # load circuit and test data
@@ -35,7 +45,6 @@ def main():
     #
     # Add fault simulation code
     #
-
     fault_count_total = 1234  # mock result
     fault_count_detected = 1233  # mock result
 
