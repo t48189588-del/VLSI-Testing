@@ -16,18 +16,31 @@ python3 ../3_stuck_at_fault_simulator data.nogit/c17.bench data.nogit/c17.tests
 # Verification scripts before programing
 1. A python script was wrote in [testing.ipynb](./fsim-contest.github/fsim-contest.github/testing.ipynb) to verify the information from the bench files.
  - Verify the # of inputs, output, and logic gates in each bench file (compare the comment with the actual ammount of gates)
-  - Some discrepancies were found 
+   - Some discrepancies were found 
+    |Bench comment info (INPUT)|Bench rows info (INPUT)|Test rows info(INPUT)|Bench comment info(OUTPUT)|Bench rows info(OUTPUT)|Test rows info(OUTPUT)|
+    |---|---|---|---|---|---|
+    |c880|60|60|60|26|26|26|
+    |c432|36|36|36|7|7|7|
+    |c1355|41|41|41|32|32|32|
+    |c7552|207|207|208|108|108|107|
+    |c17|5|5|5|2|2|2|
+    |c3540|50|50|50|22|22|22|
+    |c6288|32|32|32|32|32|32|
+    |c2670|233|233|309|140|140|64|
+    |c5315|178|178|178|123|123|123|
+    |c1908|33|33|33|25|25|25|
+    |c499|41|41|41|32|32|32|
 2. After manually reviewing the bench files, **ALL** gates only have one output.
  - For operations for the logic gate, I can ignore the order, prioritize the operation
  - **pending confirmation from prof. Stephan** The order of operation will be from top to bottom on the bench file
 3. After manually reviewing the test files, I found the following
  - it's a string of 0/1 followed by '--'(the # of hyphes is the number of outputs)
-  - some discrepancies were found
+   - some discrepancies were found
 
 # Programming 
 ## "Correct" run
 Given the data structure in the bench file and the data in test file a `dict()` will be used as following
-`dict[key]=corresponding bit position from the bench file`
+`dict[key]=corresponding bit position from the bench file`\
 `dict[value]=assigned value from test file or result of the logic operation`
 
 ## Stuck-at-fautl model
