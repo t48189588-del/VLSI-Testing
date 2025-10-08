@@ -70,7 +70,20 @@ In the case of 3 or more inputs, a recursion will be used as follow
 `6 = NAND (NAND (NAND (NAND (1,2),3),4),5)`
 
 ### Coding
+**Last update October 8,2025**
+two functions have been coded in [program](./fsim-contest.github/fsim-contest.github/3_stuck_at_fault_simulator(Kelvin_tryout).py)
 
+`def logic_gate:` This function has the behavior of the logic gates, as explain in the previous section
 
+`def read_bench:` This function reads the overall information of the circuit.
+- primary inputs
+- primary outputs
+- interconnected signals
+- logic gate inputs and outputs
 
+`def read_test:` This function reads the data of the circuit and executes the "correct" behavior
+
+**pending**
+- run stuck-at faults model
+- compare output between "correct" and stuck-at fault model
 ## Stuck-at-fautl model
