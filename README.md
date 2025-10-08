@@ -17,19 +17,19 @@ python3 ../3_stuck_at_fault_simulator data.nogit/c17.bench data.nogit/c17.tests
 1. A python script was wrote in [testing.ipynb](./fsim-contest.github/fsim-contest.github/testing.ipynb) to verify the information from the bench files.
  - Verify the # of inputs, output, and logic gates in each bench file (compare the comment with the actual ammount of gates)
    - Some discrepancies were found 
-    |Bench comment info (INPUT)|Bench rows info (INPUT)|Test rows info(INPUT)|Bench comment info(OUTPUT)|Bench rows info(OUTPUT)|Test rows info(OUTPUT)|
-    |---|---|---|---|---|---|
-    |c880|60|60|60|26|26|26|
-    |c432|36|36|36|7|7|7|
-    |c1355|41|41|41|32|32|32|
-    |c7552|207|207|208|108|108|107|
-    |c17|5|5|5|2|2|2|
-    |c3540|50|50|50|22|22|22|
-    |c6288|32|32|32|32|32|32|
-    |c2670|233|233|309|140|140|64|
-    |c5315|178|178|178|123|123|123|
-    |c1908|33|33|33|25|25|25|
-    |c499|41|41|41|32|32|32|
+| Bench comment info (INPUT) | Bench rows info (INPUT) | Test rows info(INPUT) | Bench comment info(OUTPUT) | Bench rows info(OUTPUT) | Test rows info(OUTPUT) | 
+|---|---|---|---|---|---|
+| c880 | 60 | 60 | 60 | 26 | 26 | 26 | 
+| c432 | 36 | 36 | 36 | 7 | 7 | 7 | 
+| c1355 | 41 | 41 | 41 | 32 | 32 | 32 | 
+| c7552 | 207 | 207 | 208 | 108 | 108 | 107 | 
+| c17 | 5 | 5 | 5 | 2 | 2 | 2 | 
+| c3540 | 50 | 50 | 50 | 22 | 22 | 22 | 
+| c6288 | 32 | 32 | 32 | 32 | 32 | 32 | 
+| c2670 | 233 | 233 | 309 | 140 | 140 | 64 | 
+| c5315 | 178 | 178 | 178 | 123 | 123 | 123 | 
+| c1908 | 33 | 33 | 33 | 25 | 25 | 25 | 
+| c499 | 41 | 41 | 41 | 32 | 32 | 32 | 
 2. After manually reviewing the bench files, **ALL** gates only have one output.
  - For operations for the logic gate, I can ignore the order, prioritize the operation
  - **pending confirmation from prof. Stephan** The order of operation will be from top to bottom on the bench file
