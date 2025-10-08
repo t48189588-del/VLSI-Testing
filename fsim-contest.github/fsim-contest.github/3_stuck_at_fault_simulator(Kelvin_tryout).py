@@ -22,12 +22,34 @@ def log (msg:str):
 def logic_gate(gate:str, inputs:list):
     '''
     defining the logic gate functioning
-    :param str gate: NOR, AND, NAND,OR,NOR,XOR,XNOR
+
+    :param str gate: 'NAND', 'AND', 'OR', 'NOT', 'NOR', 'BUFF', 'XOR' name of gates in bench files
     :param list inputs: defines the inputs for the gate [A,B,C...], the number of elements in the function will determine the amount of pins for the logic gate.EXCEPT for NOT gates it will take ONLY the first element
+
+    :return a single logic value to assign to the corresponding 
     '''
-    #AND gate= multiplication
-    #OR gate= addition
-    #NOT gate= addition without overflow
+
+    if gate=='NAND':
+        holder=1
+        [holder:=holder&x for x in inputs]
+        return 0 if holder else 1
+    elif gate=="AND":
+        holder=1
+        [holder:=holder&x for x in inputs]
+        return 1 if holder else 0
+    elif gate=="NOR":
+        holder =0
+        [holder:=holder|x for x in inputs]
+        return 0 if holder else 1
+    elif gate=="OR":
+        holder =0
+        [holder:=holder|x for x in inputs]
+        return 1 if holder else 0
+    elif gate=="NOR":
+        return 0 if inputs[0] else 1
+    elif gate=="BUFF":
+        return 1 if inputs[0] else 0
+
 
 def main():
 
