@@ -39,10 +39,38 @@ python3 ../3_stuck_at_fault_simulator data.nogit/c17.bench data.nogit/c17.tests
  - it's a string of 0/1 followed by '--'(the # of hyphes is the number of outputs)
    - some discrepancies were found
 
+## Diagrams for concept familiarization. 
+Based on the previous information. A simple diagram was drawn using [Wokwi](https://wokwi.com/). This diagram was based on [C17 bench](./fsim-contest.github/fsim-contest.github/data.nogit/c17.bench) information
+
+[Diagram link](https://wokwi.com/projects/444225106610273281)
+
 # Programming 
 ## "Correct" run
 Given the data structure in the bench file and the data in test file a `dict()` will be used as following
 `dict[key]=corresponding bit position from the bench file`\
 `dict[value]=assigned value from test file or result of the logic operation`
+
+### Logic gates
+
+Information was obtained from this [link](https://www.geeksforgeeks.org/python/logic-gates-in-python/)
+
+| Logic gate | Python operator/Expresion | Conditions |
+| --- | --- | --- |
+| NAND | `result = 0 if a&b else 1` | 
+| AND | `a & b` |
+| OR | `a \| b` |
+| NOT | `result= 1 if a==0 else 0` | only accepts one input |
+| NOR | `result = 0 if a\|b else 1 ` |
+| BUFF | `result = a`| only accepts one input |
+| XOR | `a ^ b` |
+| XNOR | `result = 1 if a==b else 0`|
+
+In the case of 3 or more inputs, a recursion will be used as follow
+`6 = NAND (1,2,3,4,5)`\
+`6 = NAND (NAND (NAND (NAND (1,2),3),4),5)`
+
+### Coding
+
+
 
 ## Stuck-at-fautl model
