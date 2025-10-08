@@ -17,6 +17,8 @@ python3 ../3_stuck_at_fault_simulator data.nogit/c17.bench data.nogit/c17.tests
 1. A python script was wrote in [testing.ipynb](./fsim-contest.github/fsim-contest.github/testing.ipynb) to verify the information from the bench files.
  - Verify the # of inputs, output, and logic gates in each bench file (compare the comment with the actual ammount of gates)
    - Some discrepancies were found 
+
+
 | Bench comment info (INPUT) | Bench rows info (INPUT) | Test rows info(INPUT) | Bench comment info(OUTPUT) | Bench rows info(OUTPUT) | Test rows info(OUTPUT) | 
 |---|---|---|---|---|---|
 | c880 | 60 | 60 | 60 | 26 | 26 | 26 | 
