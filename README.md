@@ -21,23 +21,23 @@ python3 ../3_stuck_at_fault_simulator data.nogit/c17.bench data.nogit/c17.tests
 
 | File | Bench comment info (INPUT) | Bench rows info (INPUT) | Test rows info(INPUT) | Bench comment info(OUTPUT) | Bench rows info(OUTPUT) | Test rows info(OUTPUT) | 
 |---|---|---|---|---|---|---|
-| c880 | 60 | 60 | 60 | 26 | 26 | 26 | 
+| c17 | 5 | 5 | 5 | 2 | 2 | 2 | 
+| c6288 | 32 | 32 | 32 | 32 | 32 | 32 | 
+| c1908 | 33 | 33 | 33 | 25 | 25 | 25 | 
 | c432 | 36 | 36 | 36 | 7 | 7 | 7 | 
 | c1355 | 41 | 41 | 41 | 32 | 32 | 32 | 
-| c7552 | 207 | 207 | $${\color{red}208}$$ | 108 | 108 | $${\color{red}107}$$ | 
-| c17 | 5 | 5 | 5 | 2 | 2 | 2 | 
-| c3540 | 50 | 50 | 50 | 22 | 22 | 22 | 
-| c6288 | 32 | 32 | 32 | 32 | 32 | 32 | 
-| c2670 | 233 | 233 | $${\color{red}309}$$ | 140 | 140 | $${\color{red}64}$$ | 
-| c5315 | 178 | 178 | 178 | 123 | 123 | 123 | 
-| c1908 | 33 | 33 | 33 | 25 | 25 | 25 | 
 | c499 | 41 | 41 | 41 | 32 | 32 | 32 | 
-2. After manually reviewing the bench files, **ALL** gates only have one output.
- - For operations for the logic gate, I can ignore the order, prioritize the operation
- - **pending confirmation from prof. Stephan** The order of operation will be from top to bottom on the bench file
-3. After manually reviewing the test files, I found the following
- - it's a string of 0/1 followed by '--'(the # of hyphes is the number of outputs)
-   - some discrepancies were found
+| c3540 | 50 | 50 | 50 | 22 | 22 | 22 | 
+| c880 | 60 | 60 | 60 | 26 | 26 | 26 | 
+| c5315 | 178 | 178 | 178 | 123 | 123 | 123 | 
+| c7552 | 207 | 207 | $${\color{red}208}$$ | 108 | 108 | $${\color{red}107}$$ | 
+| c2670 | 233 | 233 | $${\color{red}309}$$ | 140 | 140 | $${\color{red}64}$$ | 
+1. After manually reviewing the bench files, **ALL** gates only have one output.
+   - For operations for the logic gate, I can ignore the order, prioritize the operation
+   - **pending confirmation from prof. Stephan** The order of operation will be from top to bottom on the bench file
+2. After manually reviewing the test files, I found the following
+   - it's a string of 0/1 followed by '--'(the # of hyphes is the number of outputs)
+     - some discrepancies were found
 
 ## Diagrams for concept familiarization. 
 Based on the previous information. A simple diagram was drawn using [Wokwi](https://wokwi.com/). This diagram was based on [C17 bench](./fsim-contest.github/fsim-contest.github/data.nogit/c17.bench) information
