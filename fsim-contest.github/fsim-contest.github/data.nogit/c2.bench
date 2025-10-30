@@ -1,0 +1,22 @@
+# c2
+# 3 inputs
+# 1 outputs
+# 2 inverter
+# 5 gates ( 2 NOTs +2 ANDs + 1 ORs)
+
+INPUT (a)
+INPUT (b)
+INPUT (c)
+
+OUTPUT (z)
+
+d = BUFF(a)
+e = BUFF(a)
+f = BUFF(b)
+g = BUFF(b)
+h = BUFF(c)
+i = BUFF(c)
+j = NOT(d)
+k = AND(j, f, h)
+l = AND(e, g, i)
+z = OR(k, l)
