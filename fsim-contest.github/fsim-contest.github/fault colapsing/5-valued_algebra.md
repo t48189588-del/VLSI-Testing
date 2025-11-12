@@ -1,3 +1,11 @@
+## Base meaning
+|Value|Significance|
+|---|---|
+|0|false|
+|1|true|
+|X|Don't care|
+|D|Composite logic value 1/0|
+|$\overline{D}$|Composite logic value 0/1|
 
 ## AND Gate
 ### Forward implication table
