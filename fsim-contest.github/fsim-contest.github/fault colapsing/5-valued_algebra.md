@@ -115,3 +115,13 @@ $$\left( \overline{a}+\overline{z}\right) \left( a+z\right)$$
 ### Tseitin Transform
 Considering Z as output
 $$\left( a+\overline{z}\right) \left( \overline{a}+z\right)$$
+
+## Decision tree
+```mermaid
+graph TD;
+    a-->b;
+    b-->c;
+    a-->d;
+    b-->f;
+    
+```
