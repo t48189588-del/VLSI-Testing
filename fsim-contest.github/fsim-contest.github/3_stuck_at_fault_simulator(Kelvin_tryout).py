@@ -1,8 +1,6 @@
 #!/usr/bin/env python3
 
 import argparse
-
-import numpy as np
 from kyupy import bench, log, logic
 import datetime
 
