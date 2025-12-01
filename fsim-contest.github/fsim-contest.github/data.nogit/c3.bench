@@ -5,8 +5,8 @@
 # 5 gates ( 2 NOTs +2 ANDs + 1 ORs)
 
 INPUT (a)
-INPUT (b)
 INPUT (c)
+INPUT (b)
 
 OUTPUT (z)
 
