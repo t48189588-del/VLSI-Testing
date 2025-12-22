@@ -10,9 +10,7 @@ INPUT(c)
 
 OUTPUT(y)
 
-d = BUFF(b)
-e = BUFF(b)
-f = NOT(e)
+f = NOT(b)
 h = AND(f, c)
-g = AND(a, d)
+g = AND(a, b)
 y = OR(g, h)
