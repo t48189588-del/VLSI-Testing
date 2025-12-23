@@ -1,6 +1,7 @@
 #setting libraries
 from datetime import *
 import random
+import time 
 
 class SA_faults:
     def __init__(self, bench_file_name:str=''):
@@ -30,7 +31,7 @@ class SA_faults:
                 #setting time to Japan time (UTC+9)
                 self.jpTime=datetime.now(timezone(timedelta(hours=9)))
                 self.t0=self.jpTime.now() #sets starting time
-                self.read_bench(bench_file_name)
+                self.circuit, self.PIs,self.POs,self.cfaults=self.read_bench(bench_file_name)
                 print("Information loaded")
                 try:
                     self.test(bench_file_name.replace('bench','tests'))
@@ -66,56 +67,56 @@ class SA_faults:
         #verifying that the input list is just integers 0/1 
 
         aux,inputs=inputs,[] 
-        try: #typical inputs of 0 or 1
-            inputs=[int(x) for x in aux] 
-            holder=inputs[0] 
-            if gate.upper()=='NAND': 
-                [holder:=holder&x for x in inputs] 
-                holder= ~holder
-            elif gate.upper()=="AND":
-                [holder:=holder&x for x in inputs] 
-            elif gate.upper()=="OR": 
-                holder =0 
-                [holder:=holder|x for x in inputs] 
-            elif gate.upper()=="NOT":
-                holder = ~holder
-            elif gate.upper()=="NOR": 
-                holder =0 
-                [holder:=holder|x for x in inputs] 
-                holder=~holder
-            elif gate.upper()=="XOR": 
-                holder=0 
-                [holder:=holder^x for x in inputs] 
-            elif gate.upper()=="XNOR": 
-                holder=0 
-                [holder:=holder^x for x in inputs] 
-                holder=~holder
-        except: #for forward implication (having X, D, -D)
-            if 'X' in aux or 'x' in aux:
-                if gate.upper()=='NAND': 
-                    if 0 in aux or '0' in aux:
-                        holder=1
-                    else:
-                        holder='X'
-                elif gate.upper()=="AND":
-                    if 0 in aux or '0' in aux:
-                        holder=0
-                    else:
-                        holder='X'
-                elif gate.upper()=="OR": 
-                    if 1 in aux or '1' in aux:
-                        holder=1
-                    else:
-                        holder='X'
-                elif gate.upper()=="NOR": 
-                    if 1 in aux or '1' in aux:
-                        holder=0
-                    else:
-                        holder='X'
-                elif gate.upper()=="NOT" or gate.upper()=="BUFF":
-                    holder = 'X'
-                elif gate.upper()=="XOR" or gate.upper()=="XNOR":
-                    holder='X'
+        # try: #typical inputs of 0 or 1
+        inputs=[int(x) for x in aux] 
+        holder=inputs[0] 
+        if gate.upper()=='NAND': 
+            [holder:=holder&x for x in inputs] 
+            holder= ~holder
+        elif gate.upper()=="AND":
+            [holder:=holder&x for x in inputs] 
+        elif gate.upper()=="OR": 
+            holder =0 
+            [holder:=holder|x for x in inputs] 
+        elif gate.upper()=="NOT":
+            holder = ~holder
+        elif gate.upper()=="NOR": 
+            holder =0 
+            [holder:=holder|x for x in inputs] 
+            holder=~holder
+        elif gate.upper()=="XOR": 
+            holder=0 
+            [holder:=holder^x for x in inputs] 
+        elif gate.upper()=="XNOR": 
+            holder=0 
+            [holder:=holder^x for x in inputs] 
+            holder=~holder
+        # except: #for forward implication (having X, D, -D)
+        #     if 'X' in aux or 'x' in aux:
+        #         if gate.upper()=='NAND': 
+        #             if 0 in aux or '0' in aux:
+        #                 holder=1
+        #             else:
+        #                 holder='X'
+        #         elif gate.upper()=="AND":
+        #             if 0 in aux or '0' in aux:
+        #                 holder=0
+        #             else:
+        #                 holder='X'
+        #         elif gate.upper()=="OR": 
+        #             if 1 in aux or '1' in aux:
+        #                 holder=1
+        #             else:
+        #                 holder='X'
+        #         elif gate.upper()=="NOR": 
+        #             if 1 in aux or '1' in aux:
+        #                 holder=0
+        #             else:
+        #                 holder='X'
+        #         elif gate.upper()=="NOT" or gate.upper()=="BUFF":
+        #             holder = 'X'
+        #         elif gate.upper()=="XOR" or gate.upper()=="XNOR":
+        #             holder='X'
         return holder
     #circuit code
     def circuit_code(self, signal_line:dict, circ_struc:list, stuck_at:dict={}):
@@ -242,6 +243,15 @@ class SA_faults:
         self.__log("Finished generating test vectors")
         print(f'Time take to determine:{datetime.now()-t0}')
         return 
+    
+    def parts(self, se:str):
+        output=se.split("=")[0].strip()
+        gate=se.split("=")[1].split("(")[0].strip()
+        inputs=[]
+        for b in se.split("=")[1].split("(")[1][:-1].split(","):
+            inputs.append(b.strip())
+        return output, gate, inputs
+
 
     def read_bench(self, bench_file:str):
         """Reads the bench file and determines the generation of truth table or paths generation
@@ -256,97 +266,132 @@ class SA_faults:
             circ_struct: list
                 relationship input, gate and output
 
-            signal_hierarchy: dict
-                signals map of the circuit
-            
-            truth table: dict
-                ONLY if the circuit has 8 or less inputs, the truth table is generated
+            PIs: list
+                Primary inputs of the circuit
+            POS: list
+                Primary outputs of the circuit
+            collapsed_faults: list
+                List of collapsed single stuck at fauls
         """      
-        t0=datetime.now()
-        aux=0        
-        self.signals[-1]=[]
-        self.signals[0]=[] #[0]=PI [-1]=PO
-        gates={}
-        fanout_stems={}
+        t0=time.perf_counter()
+        circuit, PIs, POs,=[],[],[]
+        signals={}#key: signal, value:[logic gate signal input]
+
+        #aux variables
+        fanout_stems=0
         gate_inputs=0
-        n_inv=0
-        logic_gate_operations=0
-        with open(bench_file) as f:
-            while True:
-                a=f.readline().strip()
-                if aux>3:
-                    break
-                if not(a):
-                    aux+=1
-                    continue
-                else:
-                    if "#" in a:
-                        continue
-                    else:
-                        if 'INPUT' in a or 'OUTPUT' in a: #connections for primary input and primary output
-                            b=a.split('(')[1][:-1]
-                            if 'INPUT' in a:
-                                self.signals[0].append(b)
-                                fanout_stems[b]=0
-                            else:
-                                self.signals[-1].append(b)
-                        else: # signal = gate (input signal)
-                            self.circuit.append(a)
-                            logic_gate_operations+=1
-                            if 'NOT' in a: #getting the number of inverters
-                                n_inv+=1
-                            gate=a.split(' = ')[1].split('(')[0].strip()
-                            if gate not in gates:
-                                gates[gate]=0
-                            gates[gate]+=1
-                            
-                            for z in a.split(' = ')[1].split('(')[1][:-1].split(','):
-                                ind=0
-                                while ind<(len(self.signals)-1):
-                                    if z in self.signals[ind]:
-                                        ind+=1
-                                        break
-                                    ind+=1
-                                for x in self.signals.values():
-                                    if z in x:
-                                        fanout_stems[z]+=1
-                                if 'BUFF' not in a:
-                                    gate_inputs+=1
-                            if ind not in self.signals:
-                                self.signals[ind]=[]
-                            self.signals[ind].append(a.split('=')[0].strip())
-                            fanout_stems[a.split('=')[0].strip()]=0
-        f.close()
-        #sets the variables to show
-        self.primary_inputs=self.signals[0]
-        self.primary_outputs=self.signals[-1]
-        self.gates=gates
 
-        self.__log (f"Finished reading bench file: {bench_file}")
-        stems=0
-        for y,z in fanout_stems.items():
-            if z>1:
-                stems+=1
-        aux=0
-        for z in self.signals.values():
-            aux+=len(z)
-        self.__log (f'There area {aux*2} possible faulty circuits under the single-fault assumption')
-        print(f'Number of PIs: {len(self.signals[0])}')
-        print(f'Number of POs: {len(self.signals[-1])}')
-        print(f'Number of fanout stems: {stems}')
-        print(f'Number of gate inputs {gate_inputs}')
-        print(f'Number of inverters: {n_inv}')
-        print(f'Number of logic gate operations: {logic_gate_operations}')
-        print(f'Number of collapsed faults: {2*(len(self.signals[-1])+stems)+gate_inputs-n_inv}')
+        # def new_buffers(file):
+        with open(bench_file) as a:
+            #reading file logic gates
+            for b in a.readlines():
+                # if "#" not in b and "INPUT" not in b and "OUTPUT" not in b and len(b)>1:
+                if "=" in b:
+                    circuit.append(b.strip())
+                    outputs,_,inputs=self.parts(b.strip())
+                    POs.append(outputs)
+                    for c in inputs:
+                        if c not in POs and c not in PIs and c not in signals:
+                            PIs.append(c)
+                        if c in POs:
+                            POs.remove(c)
+                        if c not in signals:
+                            signals[c]=[]
+                        signals[c].append(b.strip())
+        a.close()
 
-        print(f'time taken: {datetime.now()-t0}')
-        if len(self.signals[0])<8: #it was chosen 8, in order to use an 8 switch input from wokwi
-            self.__log(f'circuit is small enough to perform a functional testing, generating truth table')
-            z=self.truth_table(self.signals[0],self.signals[-1],self.circuit)
-            return self.circuit, self.signals,z
-        else:
-            self.__log(f'circuit has over 10  inputs, too large to perfom a functional testing, a list with line justification is returned instead')
-            return self.circuit, self.signals
+        aux={}
+        #buffers insertion and filtering
+        for a,b in signals.items():
+            if len(b)>1: #buffer insertion
+                fanout_stems+=1
+                for d,c in enumerate(b):
+                    if "BUFF" not in c:
+                        if c in circuit:
+                            position=circuit.index(c)
+                            mod_gate=c
+                        else:
+                            for e in circuit:
+                                if a in e:
+                                    f,g,h=self.parts(e)
+                                    i=f+" = "+g
+                                    if i in c:
+                                        position=circuit.index(e)
+                                        mod_gate=e
+                        new_gate=a+'.b'+str(d)+"=BUFF("+a+")"
+                        _,_,inputs=self.parts(mod_gate)
+                        inputs[inputs.index(a)]=a+".b"+str(d)
+                        old_gate=mod_gate[:mod_gate.index("(")]+"("+",".join(inputs)+")"
+                        circuit[position]=old_gate
+                        circuit.insert(position,new_gate)
+                        #on signals
+                        b[d]=new_gate
+                        if a+".b"+str(d) not in aux:
+                            aux[a+".b"+str(d)]=[]
+                        aux[a+".b"+str(d)].append(old_gate)
+            else:
+                if "BUFF" in b[0]: #remove one buffer
+                    if b[0] in circuit:
+                        o,_,i=self.parts(b[0])
+                        circuit.remove(b[0])
+                        if o in POs:
+                            POs.remove(o)
+                            POs.insert(i[0])
+        signals.update(aux)
+
+        all_possible_faults=len(signals)*2+len(POs)*2
+
+        collapsed_faults=[]
+        equivalences=[]
+        not_gates=[]
+        #fault collapsing
+        for a in reversed(circuit):
+            b,c,d=self.parts(a)
+            if c!="BUFF": gate_inputs+=len(d)
+            if b in POs:
+                for e in ["@0","@1"]:
+                    collapsed_faults.append(b+e)
+            match c:
+                case "AND":
+                    [collapsed_faults.append(e+"@1") for e in d]
+                    [equivalences.append(e+"@0") for e in d]
+                case "OR":
+                    [collapsed_faults.append(e+"@0") for e in d]
+                    [equivalences.append(e+"@1") for e in d]
+                case "NAND":
+                    [collapsed_faults.append(e+"@1") for e in d]
+                    [equivalences.append(e+"@0") for e in d]
+                case "NOR":
+                    [collapsed_faults.append(e+"@0") for e in d]
+                    [equivalences.append(e+"@1") for e in d]
+                case _: #XOR, XNOR, BUFF, NOT
+                    if c=="NOT":
+                        not_gates.append(a)
+                    for e in d:
+                        for f in ["@0","@1"]:
+                            collapsed_faults.append(e+f)
+        for a in not_gates:
+            b,c,d=self.parts(a)
+            for e in ["@0","@1"]:
+                if b+e in equivalences:
+                    for f in d:
+                        collapsed_faults.remove(f+"@"+str(abs(1-int(e[-1]))))
+                if b+e in collapsed_faults:
+                    for f in d:
+                        collapsed_faults.remove(f+"@"+str(abs(1-int(e[-1]))))
+
+        collapsed_faults=list(sorted(set(collapsed_faults)))
+        print("*"*100)
+        print("All possible faults: ",all_possible_faults)
+        print("# of POs: ",len(POs))
+        print("# of fanout stems: ",fanout_stems)
+        print("# of gate inputs: ",gate_inputs)
+        print("# of inverter gates: ",len(not_gates))
+        print("Expected collapsed faults: ",2*(len(POs)+fanout_stems)+gate_inputs-len(not_gates))
+        print("Calculated collapsed faults: ",len(collapsed_faults))
+        print(f"Time taken: {(time.perf_counter()-t0):09.3f}")
+        print("*"*100)
+        return circuit,PIs, POs, collapsed_faults
     
     def __justification(self,signal:str, value:str ='0',needed_PIs:dict={}):
         """_summary_
@@ -582,7 +627,7 @@ class SA_faults:
         self.__log(f"Finished running test file {test_file}")
         print(f'Time taken: {datetime.now()-t0}')
         return
-    
+    ##drawing circuit in wokwi
     def __logic_gate_diagram(self, gate:str,number:int,top:int,left:int):
         '''Writes the code for the logic gates 
         Params
