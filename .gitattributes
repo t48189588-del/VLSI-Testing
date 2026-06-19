@@ -1,1 +1,2 @@
+.log filter=lfs diff=lfs merge=lfs -text
 fsim-contest.github/fsim-contest.github/logs/c5315_report.log filter=lfs diff=lfs merge=lfs -text
