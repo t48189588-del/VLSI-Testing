@@ -18,6 +18,24 @@ Logs
 # 0000045.925 - fsim performance: 1.03e+09 gfp/s
 # 0000045.925 - detected by simulation (collapsed): 7646/7680  -  99.56%
 ```
+## C6288.bench on local device 
+```
+# 0000000.529 W Cuda unavailable. Falling back to pure Python.
+# 0000002.747 - loading tests/c6288.bench ...
+# 0000002.867 - circuit stats={'node': 4864, 'cell': 2416, 'fork': 2448, 'io': 64, 'line': 7216, 'comb': 2416, 'dff': 0, 'latch': 0, 'seq': 0}
+# 0000002.882 - line role stats={'lout': 7216}
+# 0000002.964 - fault sites: 6256
+# 0000002.964 - uncollapsed stuck-at fault count: 12512
+# 0000002.964 - collapsed stuck-at fault count: 7680
+# 0000002.973 - FFR count: 1456
+# 0000003.062 - simple safsim.sim={name: "tests/c6288.bench", sims: 1024, c_bytes: 928e3}
+# 0000033.610 : DS:1503 NO:11 - 20% done 5s elapsed 20s remaining
+# 0000040.610 : DS:3601 NO:19 - 47% done 12s elapsed 13s remaining
+# 0000050.611 : DS:6791 NO:32 - 89% done 22s elapsed 2s remaining
+# 0000053.338 - safsim.timers={startup: 25.55, sim: 24.73, sim_prop: 14.84, sim_eval2: 3.67, sim_eval: 3.52}
+# 0000053.338 - fsim performance: 7.68e+08 gfp/s
+# 0000053.338 - detected by simulation (collapsed): 7646/7680  -  99.56%
+```
 ## Installation ocurrences
 cloning repo
 ```
@@ -158,4 +176,65 @@ SEMMNS   Total number of semaphores                          1024000000    0 0.0
 SEMMSL   Max semaphores per semaphore set.                        32000    -     -
 SEMOPM   Max number of operations per semop(2)                      500    -     -
 SEMVMX   Semaphore max value                                      32767    -     -
+```
+# Local device
+## OS info
+Linux Lenovo 6.17.0-35-generic #35~24.04.1-Ubuntu SMP PREEMPT_DYNAMIC Tue May 26 19:30:42 UTC 2 x86_64 x86_64 x86_64 GNU/Linux
+
+## CPU
+```
+Architecture:                            x86_64
+CPU op-mode(s):                          32-bit, 64-bit
+Address sizes:                           39 bits physical, 48 bits virtual
+Byte Order:                              Little Endian
+CPU(s):                                  8
+On-line CPU(s) list:                     0-7
+Vendor ID:                               GenuineIntel
+Model name:                              Intel(R) Core(TM) i5-8265U CPU @ 1.60GHz
+CPU family:                              6
+Model:                                   142
+Thread(s) per core:                      2
+Core(s) per socket:                      4
+Socket(s):                               1
+Stepping:                                11
+CPU(s) scaling MHz:                      28%
+CPU max MHz:                             3900.0000
+CPU min MHz:                             400.0000
+BogoMIPS:                                3600.00
+Flags:                                   fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc art arch_perfmon pebs bts rep_good nopl xtopology nonstop_tsc cpuid aperfmperf pni pclmulqdq dtes64 monitor ds_cpl est tm2 ssse3 sdbg fma cx16 xtpr pdcm pcid sse4_1 sse4_2 x2apic movbe popcnt tsc_deadline_timer aes xsave avx f16c rdrand lahf_lm abm 3dnowprefetch cpuid_fault epb ssbd ibrs ibpb stibp fsgsbase tsc_adjust sgx bmi1 avx2 smep bmi2 erms invpcid mpx rdseed adx smap clflushopt intel_pt xsaveopt xsavec xgetbv1 xsaves dtherm ida arat pln pts hwp hwp_notify hwp_act_window hwp_epp md_clear flush_l1d arch_capabilities
+L1d cache:                               128 KiB (4 instances)
+L1i cache:                               128 KiB (4 instances)
+L2 cache:                                1 MiB (4 instances)
+L3 cache:                                6 MiB (1 instance)
+NUMA node(s):                            1
+NUMA node0 CPU(s):                       0-7
+Vulnerability Gather data sampling:      Vulnerable
+Vulnerability Ghostwrite:                Not affected
+Vulnerability Indirect target selection: Not affected
+Vulnerability Itlb multihit:             KVM: Mitigation: VMX unsupported
+Vulnerability L1tf:                      Not affected
+Vulnerability Mds:                       Mitigation; Clear CPU buffers; SMT vulnerable
+Vulnerability Meltdown:                  Not affected
+Vulnerability Mmio stale data:           Mitigation; Clear CPU buffers; SMT vulnerable
+Vulnerability Old microcode:             Not affected
+Vulnerability Reg file data sampling:    Not affected
+Vulnerability Retbleed:                  Mitigation; IBRS
+Vulnerability Spec rstack overflow:      Not affected
+Vulnerability Spec store bypass:         Mitigation; Speculative Store Bypass disabled via prctl
+Vulnerability Spectre v1:                Mitigation; usercopy/swapgs barriers and __user pointer sanitization
+Vulnerability Spectre v2:                Mitigation; IBRS; IBPB conditional; STIBP conditional; RSB filling; PBRSB-eIBRS Not affected; BHI Not affected
+Vulnerability Srbds:                     Mitigation; Microcode
+Vulnerability Tsa:                       Not affected
+Vulnerability Tsx async abort:           Not affected
+Vulnerability Vmscape:                   Mitigation; IBPB before exit to userspace
+```
+## Memory
+```
+RANGE                                  SIZE  STATE REMOVABLE BLOCK
+0x0000000000000000-0x000000004fffffff  1.3G online       yes   0-9
+0x0000000100000000-0x00000002a7ffffff  6.6G online       yes 32-84
+
+Memory block size:       128M
+Total online memory:     7.9G
+Total offline memory:      0B
 ```
