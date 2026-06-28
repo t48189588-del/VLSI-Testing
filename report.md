@@ -1,0 +1,161 @@
+Logs 
+
+# Logs 
+## C6288.bench on github codespace
+```
+# 0000000.649 W Cuda unavailable. Falling back to pure Python.
+# 0000003.321 - loading tests/c6288.bench ...
+# 0000003.540 - circuit stats={'node': 4864, 'cell': 2416, 'fork': 2448, 'io': 64, 'line': 7216, 'comb': 2416, 'dff': 0, 'latch': 0, 'seq': 0}
+# 0000003.565 - line role stats={'lout': 7216}
+# 0000003.661 - fault sites: 6256
+# 0000003.661 - uncollapsed stuck-at fault count: 12512
+# 0000003.661 - collapsed stuck-at fault count: 7680
+# 0000003.668 - FFR count: 1456
+# 0000003.787 - simple safsim.sim={name: "tests/c6288.bench", sims: 1024, c_bytes: 928e3}
+# 0000032.427 : DS:2121 NO:14 - 28% done 5s elapsed 12s remaining
+# 0000039.427 : DS:5015 NO:22 - 66% done 12s elapsed 6s remaining
+# 0000045.925 - safsim.timers={startup: 23.64, sim: 18.50, sim_prop: 11.19, sim_eval: 3.05, sim_eval2: 2.20}
+# 0000045.925 - fsim performance: 1.03e+09 gfp/s
+# 0000045.925 - detected by simulation (collapsed): 7646/7680  -  99.56%
+```
+## Installation ocurrences
+cloning repo
+```
+git clone https://git.vlab.cse.kyutech.ac.jp/stefan/fsim.git
+```
+update submodule
+`git submodule update --init --recursive
+`
+returned
+```
+Submodule 'kyupy' (git@git.vlab.cse.kyutech.ac.jp:stefan/kyupy.git) registered for path 'kyupy'
+Cloning into '/workspaces/VLSI-Testing/fsim/kyupy'...
+The authenticity of host 'git.vlab.cse.kyutech.ac.jp (131.206.36.218)' can't be established.
+ED25519 key fingerprint is SHA256:+5XnHikE+Iv+tgYM3n/LaIdy9//VPJkXxETwef6HmU0.
+This key is not known by any other names.
+Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
+Warning: Permanently added 'git.vlab.cse.kyutech.ac.jp' (ED25519) to the list of known hosts.
+git@git.vlab.cse.kyutech.ac.jp: Permission denied (publickey).
+fatal: Could not read from remote repository.
+
+Please make sure you have the correct access rights
+and the repository exists.
+fatal: clone of 'git@git.vlab.cse.kyutech.ac.jp:stefan/kyupy.git' into submodule path '/workspaces/VLSI-Testing/fsim/kyupy' failed
+Failed to clone 'kyupy'. Retry scheduled
+Cloning into '/workspaces/VLSI-Testing/fsim/kyupy'...
+git@git.vlab.cse.kyutech.ac.jp: Permission denied (publickey).
+fatal: Could not read from remote repository.
+
+Please make sure you have the correct access rights
+and the repository exists.
+fatal: clone of 'git@git.vlab.cse.kyutech.ac.jp:stefan/kyupy.git' into submodule path '/workspaces/VLSI-Testing/fsim/kyupy' failed
+Failed to clone 'kyupy' a second time, aborting
+```
+made changes in [.gitmodules](.gitmodules)
+|original|new change|
+|---|---|
+|`url = git@git.vlab.cse.kyutech.ac.jp:stefan/kyupy.git`|`url = https://git.vlab.cse.kyutech.ac.jp/stefan/kyupy.git`|
+ran
+```
+git submodule sync
+git submodule update --init --recursive
+```
+returned
+```
+      Built kyupy @ file:///workspaces/VLSI-Testing/fsim/kyupy
+Uninstalled 1 package in 4ms
+░░░░░░░░░░░░░░░░░░░░ [0/1] Installing wheels...                                              warning: Failed to hardlink files; falling back to full copy. This may lead to degraded performance.
+         If the cache and target directories are on different filesystems, hardlinking may not be supported.
+         If this is intentional, set `export UV_LINK_MODE=copy` or use `--link-mode=copy` to suppress this warning.
+Installed 1 package in 6ms
+==================================== test session starts ====================================
+platform linux -- Python 3.13.14, pytest-9.1.1, pluggy-1.6.0
+rootdir: /workspaces/VLSI-Testing/fsim
+configfile: pyproject.toml
+plugins: anyio-4.14.0
+collected 83 items                                                                          
+
+kyupy/tests/test_atalanta.py ..                                                       [  2%]
+kyupy/tests/test_bench.py ..                                                          [  4%]
+kyupy/tests/test_circuit.py .......                                                   [ 13%]
+kyupy/tests/test_logic.py ....                                                        [ 18%]
+kyupy/tests/test_logic_sim.py .................                                       [ 38%]
+kyupy/tests/test_sdf.py ....                                                          [ 43%]
+kyupy/tests/test_stil.py .                                                            [ 44%]
+kyupy/tests/test_verilog.py ....                                                      [ 49%]
+kyupy/tests/test_wave_sim.py ......                                                   [ 56%]
+tests/test_fault_set.py .......                                                       [ 65%]
+tests/test_line_roles.py ....                                                         [ 69%]
+tests/test_safsim.py .........................                                        [100%]
+
+===================================== warnings summary ======================================
+kyupy/tests/test_stil.py::test_b15
+  /workspaces/VLSI-Testing/fsim/kyupy/src/kyupy/stil.py:144: DeprecationWarning: LogicSim is deprecated; use LogicSim2V, LogicSim4V, or LogicSim6V instead.
+    sim8v = LogicSim(circuit_resolved, init.shape[-1], m=8)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+========================= 83 passed, 1 warning in 138.27s (0:02:18) =========================
+```
+
+# Github Codespace specs
+## CPU
+```
+Architecture:                            x86_64
+CPU op-mode(s):                          32-bit, 64-bit
+Address sizes:                           48 bits physical, 48 bits virtual
+Byte Order:                              Little Endian
+CPU(s):                                  2
+On-line CPU(s) list:                     0,1
+Vendor ID:                               AuthenticAMD
+Model name:                              AMD EPYC 7763 64-Core Processor
+CPU family:                              25
+Model:                                   1
+Thread(s) per core:                      2
+Core(s) per socket:                      1
+Socket(s):                               1
+Stepping:                                1
+BogoMIPS:                                4890.85
+Flags:                                   fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm constant_tsc rep_good nopl tsc_reliable nonstop_tsc cpuid extd_apicid aperfmperf tsc_known_freq pni pclmulqdq ssse3 fma cx16 pcid sse4_1 sse4_2 movbe popcnt aes xsave avx f16c rdrand hypervisor lahf_lm cmp_legacy svm cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw topoext vmmcall fsgsbase bmi1 avx2 smep bmi2 erms invpcid rdseed adx smap clflushopt clwb sha_ni xsaveopt xsavec xgetbv1 xsaves user_shstk clzero xsaveerptr rdpru arat npt nrip_save tsc_scale vmcb_clean flushbyasid decodeassists pausefilter pfthreshold v_vmsave_vmload umip vaes vpclmulqdq rdpid fsrm
+Virtualization:                          AMD-V
+Hypervisor vendor:                       Microsoft
+Virtualization type:                     full
+L1d cache:                               32 KiB (1 instance)
+L1i cache:                               32 KiB (1 instance)
+L2 cache:                                512 KiB (1 instance)
+L3 cache:                                32 MiB (1 instance)
+NUMA node(s):                            1
+NUMA node0 CPU(s):                       0,1
+Vulnerability Gather data sampling:      Not affected
+Vulnerability Indirect target selection: Not affected
+Vulnerability Itlb multihit:             Not affected
+Vulnerability L1tf:                      Not affected
+Vulnerability Mds:                       Not affected
+Vulnerability Meltdown:                  Not affected
+Vulnerability Mmio stale data:           Not affected
+Vulnerability Reg file data sampling:    Not affected
+Vulnerability Retbleed:                  Not affected
+Vulnerability Spec rstack overflow:      Vulnerable: Safe RET, no microcode
+Vulnerability Spec store bypass:         Vulnerable
+Vulnerability Spectre v1:                Mitigation; usercopy/swapgs barriers and __user pointer sanitization
+Vulnerability Spectre v2:                Mitigation; Retpolines; STIBP disabled; RSB filling; PBRSB-eIBRS Not affected; BHI Not affected
+Vulnerability Srbds:                     Not affected
+Vulnerability Tsa:                       Vulnerable: Clear CPU buffers attempted, no microcode
+Vulnerability Tsx async abort:           Not affected
+Vulnerability Vmscape:                   Not affected
+```
+## LSIPC
+```
+RESOURCE DESCRIPTION                                              LIMIT USED  USE%
+MSGMNI   Number of message queues                                 32000    0 0.00%
+MSGMAX   Max size of message (bytes)                                 8K    -     -
+MSGMNB   Default max size of queue (bytes)                          16K    -     -
+SHMMNI   Shared memory segments                                    4096    0 0.00%
+SHMALL   Shared memory pages                       18446744073692774399    0 0.00%
+SHMMAX   Max size of shared memory segment (bytes)                  16E    -     -
+SHMMIN   Min size of shared memory segment (bytes)                   1B    -     -
+SEMMNI   Number of semaphore identifiers                          32000    0 0.00%
+SEMMNS   Total number of semaphores                          1024000000    0 0.00%
+SEMMSL   Max semaphores per semaphore set.                        32000    -     -
+SEMOPM   Max number of operations per semop(2)                      500    -     -
+SEMVMX   Semaphore max value                                      32767    -     -
+```
