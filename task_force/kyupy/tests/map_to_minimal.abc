@@ -1,8 +1,0 @@
-# abc -f map_to_minimal.abc
-
-read kyupy_simprims.genlib
-read -m all_kyupy_simprims.v
-fraig
-read minimal.genlib
-map
-write all_kyupy_simprims.minimal.v

@@ -1,4 +1,0 @@
-[submodule "kyupy"]
-	path = task_force/kyupy
-	url = https://git.vlab.cse.kyutech.ac.jp/stefan/kyupy.git #git@git.vlab.cse.kyutech.ac.jp:stefan/kyupy.git
-	branch = devel
