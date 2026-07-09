@@ -4,14 +4,15 @@ For performance stats gfs/s = gates * faults * patterns/second
 |test|[Github](#github-codespace-specs)|[Local](#local-device)|
 |---|---|---|
 |c6288<br>SAFSimSimple|1.03e+09 gfp/s|7.68e+08 gfp/s|
-|c6288<br>SAFSimIncremental||1.01e+09 gfp/s|
-|c6288<br>SAFSimPPSFP||4.88e+09 gfp/s|
-|c7522<br>SAFSimSimple||2.95e+08 gfp/s|
-|c7522<br>SAFSimIncremental||1.09e+09 gfp/s|
-|c7522<br>SAFSimPPSFP||6.95e+09 gfp/s|
+|c6288<br>SAFSimIncremental|2.73e+09 gfp/s|1.01e+09 gfp/s|
+|c6288<br>SAFSimPPSFP|1.21e+10 gfp/s|4.88e+09 gfp/s|
+|c7522<br>SAFSimSimple|7.86e+08 gfp/s|2.95e+08 gfp/s|
+|c7522<br>SAFSimIncremental|3.08e+09 gfp/s|1.09e+09 gfp/s|
+|c7522<br>SAFSimPPSFP|1.91e+10 gfp/s|6.95e+09 gfp/s|
 
 # Logs 
 ## C6288.bench on github codespace
+### simple 
 ```
 # 0000000.649 W Cuda unavailable. Falling back to pure Python.
 # 0000003.321 - loading tests/c6288.bench ...
@@ -27,6 +28,37 @@ For performance stats gfs/s = gates * faults * patterns/second
 # 0000045.925 - safsim.timers={startup: 23.64, sim: 18.50, sim_prop: 11.19, sim_eval: 3.05, sim_eval2: 2.20}
 # 0000045.925 - fsim performance: 1.03e+09 gfp/s
 # 0000045.925 - detected by simulation (collapsed): 7646/7680  -  99.56%
+```
+### Incremental
+```
+# 0000000.375 W Cuda unavailable. Falling back to pure Python.
+# 0000002.505 - loading tests/c6288.bench ...
+# 0000002.613 - circuit stats={'node': 4864, 'cell': 2416, 'fork': 2448, 'io': 64, 'line': 7216, 'comb': 2416, 'dff': 0, 'latch': 0, 'seq': 0}
+# 0000002.628 - line role stats={'lout': 7216}
+# 0000002.698 - fault sites: 6256
+# 0000002.698 - uncollapsed stuck-at fault count: 12512
+# 0000002.698 - collapsed stuck-at fault count: 7680
+# 0000002.705 - FFR count: 1456
+# 0000002.786 - incr safsim.sim={name: "tests/c6288.bench", sims: 1024, c_bytes: 928e3}
+# 0000026.600 :  - 74% done 5s elapsed 1s remaining
+# 0000028.565 - safsim.timers={startup: 18.81, sim: 6.96, sim_incr_prop: 6.48, sim_incr_reset: 0.30, sim_incr_eval: 0.14, sim_full_prop: 0.00}
+# 0000028.565 - fsim performance: 2.73e+09 gfp/s
+# 0000028.565 - detected by simulation (collapsed): 7646/7680  -  99.56%
+```
+### PPSFP
+```
+# 0000000.325 W Cuda unavailable. Falling back to pure Python.
+# 0000002.405 - loading tests/c6288.bench ...
+# 0000002.530 - circuit stats={'node': 4864, 'cell': 2416, 'fork': 2448, 'io': 64, 'line': 7216, 'comb': 2416, 'dff': 0, 'latch': 0, 'seq': 0}
+# 0000002.542 - line role stats={'lout': 7216}
+# 0000002.608 - fault sites: 6256
+# 0000002.608 - uncollapsed stuck-at fault count: 12512
+# 0000002.608 - collapsed stuck-at fault count: 7680
+# 0000002.616 - FFR count: 1456
+# 0000002.709 - ppsfp safsim.sim={name: "tests/c6288.bench", sims: 1024, c_bytes: 928e3}
+# 0000022.989 - safsim.timers={startup: 18.71, sim: 1.57, sim_ffr_prop: 1.37, sim_ffr_reset: 0.06, sim_sens: 0.05, sim_ffr_out_reduce: 0.03, sim_full_prop: 0.00}
+# 0000022.989 - fsim performance: 1.21e+10 gfp/s
+# 0000022.989 - detected by simulation (collapsed): 7646/7680  -  99.56%
 ```
 ## C6288.bench on local device 
 ### simple
@@ -79,6 +111,60 @@ For performance stats gfs/s = gates * faults * patterns/second
 # 0000048.861 - fsim performance: 4.88e+09 gfp/s
 # 0000048.861 - detected by simulation (collapsed): 7646/7680  -  99.56%
 ```
+## C7552.bench on github
+### simple
+```
+# 0000000.529 W Cuda unavailable. Falling back to pure Python.
+# 0000003.104 - loading tests/c7552.bench ...
+# 0000003.117 W input-output passthrough, renaming output: 241 -> 241~o
+# 0000003.283 - circuit stats={'node': 7344, 'cell': 3568, 'fork': 3776, 'io': 315, 'line': 9769, 'comb': 3568, 'dff': 0, 'latch': 0, 'seq': 0}
+# 0000003.302 - line role stats={'lout': 9769}
+# 0000003.392 - fault sites: 7531
+# 0000003.392 - uncollapsed stuck-at fault count: 15062
+# 0000003.392 - collapsed stuck-at fault count: 7452
+# 0000003.405 - FFR count: 1300
+# 0000003.515 - simple safsim.sim={name: "tests/c7552.bench", sims: 1024, c_bytes: 1e6}
+# 0000027.768 : DS:1031 NO:74 - 15% done 5s elapsed 28s remaining
+# 0000034.773 : DS:2407 NO:190 - 35% done 12s elapsed 22s remaining
+# 0000044.774 : DS:4394 NO:364 - 64% done 22s elapsed 12s remaining
+# 0000057.411 - safsim.timers={sim: 34.65, startup: 19.25, sim_prop: 12.02, sim_eval: 6.73, sim_eval2: 6.70}
+# 0000057.411 - fsim performance: 7.86e+08 gfp/s
+# 0000057.411 - detected by simulation (collapsed): 6893/7452  -  92.50%
+```
+### incremental
+```
+# 0000000.404 W Cuda unavailable. Falling back to pure Python.
+# 0000002.797 - loading tests/c7552.bench ...
+# 0000002.811 W input-output passthrough, renaming output: 241 -> 241~o
+# 0000002.956 - circuit stats={'node': 7344, 'cell': 3568, 'fork': 3776, 'io': 315, 'line': 9769, 'comb': 3568, 'dff': 0, 'latch': 0, 'seq': 0}
+# 0000002.979 - line role stats={'lout': 9769}
+# 0000003.093 - fault sites: 7531
+# 0000003.093 - uncollapsed stuck-at fault count: 15062
+# 0000003.093 - collapsed stuck-at fault count: 7452
+# 0000003.107 - FFR count: 1300
+# 0000003.255 - incr safsim.sim={name: "tests/c7552.bench", sims: 1024, c_bytes: 1e6}
+# 0000028.838 :  - 56% done 5s elapsed 3s remaining
+# 0000032.689 - safsim.timers={startup: 20.58, sim: 8.85, sim_incr_prop: 8.22, sim_incr_reset: 0.40, sim_incr_eval: 0.19, sim_full_prop: 0.00}
+# 0000032.689 - fsim performance: 3.08e+09 gfp/s
+# 0000032.689 - detected by simulation (collapsed): 6893/7452  -  92.50%
+```
+### PPSFP
+```
+# 0000000.508 W Cuda unavailable. Falling back to pure Python.
+# 0000003.157 - loading tests/c7552.bench ...
+# 0000003.168 W input-output passthrough, renaming output: 241 -> 241~o
+# 0000003.305 - circuit stats={'node': 7344, 'cell': 3568, 'fork': 3776, 'io': 315, 'line': 9769, 'comb': 3568, 'dff': 0, 'latch': 0, 'seq': 0}
+# 0000003.324 - line role stats={'lout': 9769}
+# 0000003.415 - fault sites: 7531
+# 0000003.415 - uncollapsed stuck-at fault count: 15062
+# 0000003.415 - collapsed stuck-at fault count: 7452
+# 0000003.427 - FFR count: 1300
+# 0000003.548 - ppsfp safsim.sim={name: "tests/c7552.bench", sims: 1024, c_bytes: 1e6}
+# 0000024.227 - safsim.timers={startup: 19.26, sim: 1.42, sim_ffr_prop: 1.21, sim_ffr_reset: 0.06, sim_sens: 0.06, sim_ffr_out_reduce: 0.02, sim_full_prop: 0.00}
+# 0000024.227 - fsim performance: 1.91e+10 gfp/s
+# 0000024.227 - detected by simulation (collapsed): 6893/7452  -  92.50%
+```
+
 ## C7552.bench on local device
 ### Simple
 ```
@@ -216,6 +302,8 @@ kyupy/tests/test_stil.py::test_b15
 -- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
 ========================= 83 passed, 1 warning in 138.27s (0:02:18) =========================
 ```
+### when builiding codespace from scratch 
+Run command `curl -LsSf https://astral.sh/uv/install.sh | sh` to ensure uv command run well
 
 # Github Codespace specs
 ## CPU
