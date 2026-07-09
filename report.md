@@ -10,6 +10,9 @@ For performance stats gfs/s = gates * faults * patterns/second
 |c7522<br>SAFSimIncremental|3.08e+09 gfp/s|1.09e+09 gfp/s|
 |c7522<br>SAFSimPPSFP|1.91e+10 gfp/s|6.95e+09 gfp/s|
 
+
+Issue with [polito itc99](#polito)
+
 # Logs 
 ## C6288.bench on github codespace
 ### simple 
@@ -443,4 +446,39 @@ SEMMNS   Total number of semaphores                          1024000000    0 0.0
 SEMMSL   Max semaphores per semaphore set.                        32000    -     -
 SEMOPM   Max number of operations per semop(2)                      500    -     -
 SEMVMX   Semaphore max value                                      32767    -     -
+```
+
+# Issues
+## Polito
+When running `uv run main.py polito-itc99-b15-sky130` terminal returns the following
+```
+# 0000000.316 W Cuda unavailable. Falling back to pure Python.
+Traceback (most recent call last):
+  File "/workspaces/VLSI-Testing/task_force/fsim/main.py", line 105, in <module>
+    main()
+    ~~~~^^
+  File "/workspaces/VLSI-Testing/task_force/fsim/main.py", line 33, in main
+    benchmark_path = Path(subprocess.check_output(nix_cmd.split(), text=True).strip())
+                          ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/codespace/.local/share/uv/python/cpython-3.13.14-linux-x86_64-gnu/lib/python3.13/subprocess.py", line 472, in check_output
+    return run(*popenargs, stdout=PIPE, timeout=timeout, check=True,
+           ~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+               **kwargs).stdout
+               ^^^^^^^^^
+  File "/home/codespace/.local/share/uv/python/cpython-3.13.14-linux-x86_64-gnu/lib/python3.13/subprocess.py", line 554, in run
+    with Popen(*popenargs, **kwargs) as process:
+         ~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/codespace/.local/share/uv/python/cpython-3.13.14-linux-x86_64-gnu/lib/python3.13/subprocess.py", line 1039, in __init__
+    self._execute_child(args, executable, preexec_fn, close_fds,
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                        pass_fds, cwd, env,
+                        ^^^^^^^^^^^^^^^^^^^
+    ...<5 lines>...
+                        gid, gids, uid, umask,
+                        ^^^^^^^^^^^^^^^^^^^^^^
+                        start_new_session, process_group)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/codespace/.local/share/uv/python/cpython-3.13.14-linux-x86_64-gnu/lib/python3.13/subprocess.py", line 1991, in _execute_child
+    raise child_exception_type(errno_num, err_msg, err_filename)
+FileNotFoundError: [Errno 2] No such file or directory: 'nix'
 ```
