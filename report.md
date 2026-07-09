@@ -1,6 +1,7 @@
 Logs 
 
 # Logs 
+
 ## C6288.bench on github codespace
 ```
 # 0000000.649 W Cuda unavailable. Falling back to pure Python.
@@ -35,6 +36,29 @@ Logs
 # 0000053.338 - safsim.timers={startup: 25.55, sim: 24.73, sim_prop: 14.84, sim_eval2: 3.67, sim_eval: 3.52}
 # 0000053.338 - fsim performance: 7.68e+08 gfp/s
 # 0000053.338 - detected by simulation (collapsed): 7646/7680  -  99.56%
+```
+
+## C67552.bench on local device
+```
+# 0000000.573 W Cuda unavailable. Falling back to pure Python.
+# 0000004.258 - loading tests/c7552.bench ...
+# 0000004.277 W input-output passthrough, renaming output: 241 -> 241~o
+# 0000004.540 - circuit stats={'node': 7344, 'cell': 3568, 'fork': 3776, 'io': 315, 'line': 9769, 'comb': 3568, 'dff': 0, 'latch': 0, 'seq': 0}
+# 0000004.576 - line role stats={'lout': 9769}
+# 0000004.756 - fault sites: 7531
+# 0000004.756 - uncollapsed stuck-at fault count: 15062
+# 0000004.756 - collapsed stuck-at fault count: 7452
+# 0000004.780 - FFR count: 1300
+# 0000005.010 - simple safsim.sim={name: "tests/c7552.bench", sims: 1024, c_bytes: 1e6}
+# 0000048.118 : DS:380 NO:33 - 6% done 5s elapsed 1m25s remaining
+# 0000055.120 : DS:900 NO:68 - 13% done 12s elapsed 1m20s remaining
+# 0000065.120 : DS:1651 NO:124 - 24% done 22s elapsed 1m10s remaining
+# 0000080.121 : DS:2738 NO:226 - 40% done 37s elapsed 56s remaining
+# 0000102.123 : DS:4422 NO:366 - 64% done 59s elapsed 32s remaining
+# 0000135.129 : DS:6876 NO:557 - 100% done 1m32s elapsed 0s remaining
+# 0000135.364 - safsim.timers={sim: 92.25, startup: 38.11, sim_prop: 30.52, sim_eval2: 25.83, sim_eval: 12.92}
+# 0000135.364 - fsim performance: 2.95e+08 gfp/s
+# 0000135.364 - detected by simulation (collapsed): 6893/7452  -  92.50%
 ```
 ## Installation ocurrences
 cloning repo

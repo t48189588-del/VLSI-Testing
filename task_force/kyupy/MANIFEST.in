@@ -1,7 +1,0 @@
-include *.txt
-recursive-include examples *.ipynb
-recursive-include tests *.bench
-recursive-include tests *.gz
-recursive-include tests *.py
-recursive-include tests *.sdf
-recursive-include tests *.v

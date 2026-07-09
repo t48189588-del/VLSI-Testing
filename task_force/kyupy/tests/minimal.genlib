@@ -1,5 +1,0 @@
-# A minimal library for generating logically equivalent circuits with
-# minimum number of gate types.
-GATE BUF1     1  o=i0;                         PIN * NONINV 1 999 1 0 1 0
-GATE INV1     1  o=!i0;                        PIN * INV 1 999 1 0 1 0
-GATE AND2     1  o=i0*i1;                      PIN * NONINV 1 999 1 0 1 0

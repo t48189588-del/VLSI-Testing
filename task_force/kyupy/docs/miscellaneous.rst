@@ -1,6 +1,0 @@
-Miscellaneous
-=============
-
-.. automodule:: kyupy
-   :members:
-
