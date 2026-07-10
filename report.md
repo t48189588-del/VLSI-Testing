@@ -482,3 +482,4 @@ Traceback (most recent call last):
     raise child_exception_type(errno_num, err_msg, err_filename)
 FileNotFoundError: [Errno 2] No such file or directory: 'nix'
 ```
+issue remain even after installanig nix
