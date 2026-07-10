@@ -38,7 +38,7 @@ python3 ../3_stuck_at_fault_simulator data.nogit/c17.bench data.nogit/c17.tests
 3. After manually reviewing the test files, I found the following
  - it's a string of 0/1 followed by '--'(the # of hyphes is the number of outputs)
    - some discrepancies were found
-
+4. Larger circuits to test from [polito](https://github.com/cad-polito-it/I99T)
 ## Diagrams for concept familiarization. 
 Based on the previous information. A simple diagram was drawn using [Wokwi](https://wokwi.com/). This diagram was based on [C17 bench](./fsim-contest.github/fsim-contest.github/data.nogit/c17.bench) information
 
@@ -86,4 +86,3 @@ two functions have been coded in [program](./fsim-contest.github/fsim-contest.gi
 **pending**
 - run stuck-at faults model
 - compare output between "correct" and stuck-at fault model
-## Stuck-at-fautl model
