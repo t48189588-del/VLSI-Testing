@@ -6,12 +6,15 @@ For performance stats gfs/s = gates * faults * patterns/second
 |c6288<br>SAFSimSimple|1.03e+09 gfp/s|7.68e+08 gfp/s|
 |c6288<br>SAFSimIncremental|2.73e+09 gfp/s|1.01e+09 gfp/s|
 |c6288<br>SAFSimPPSFP|1.21e+10 gfp/s|4.88e+09 gfp/s|
+|[polito-itc99-b15-sky130<br>SAFSimple](#simple-2)||6.05e+08 gfp/s|
+[polito-itc99-b15-sky130<br>SAFSimIncremental](#incremental-2)||2.84e+09 gfp/s|
+[polito-itc99-b15-sky130<br>SAFSimPPSFP](#ppsfp-2)||3.16e+10 gfp/s|
 |c7522<br>SAFSimSimple|7.86e+08 gfp/s|2.95e+08 gfp/s|
 |c7522<br>SAFSimIncremental|3.08e+09 gfp/s|1.09e+09 gfp/s|
 |c7522<br>SAFSimPPSFP|1.91e+10 gfp/s|6.95e+09 gfp/s|
 
 
-Issue with [polito itc99](#polito)
+
 
 # Logs 
 ## C6288.bench on github codespace
@@ -113,6 +116,71 @@ Issue with [polito itc99](#polito)
 # 0000048.860 - safsim.timers={startup: 39.74, sim: 3.90, sim_ffr_prop: 3.38, sim_ffr_reset: 0.14, sim_sens: 0.13, sim_ffr_out_reduce: 0.07, sim_full_prop: 0.00}
 # 0000048.861 - fsim performance: 4.88e+09 gfp/s
 # 0000048.861 - detected by simulation (collapsed): 7646/7680  -  99.56%
+```
+## polito itc99-b15-sky130 on local
+### simple
+```
+# 0000000.982 W Cuda unavailable. Falling back to pure Python.
+# 0001745.539 - loading /nix/store/87l6ny2dcww3514v6wn292yli8ni0iz6-polito-itc99-b15-sky130/b15/nl/b15.nl.v ...
+# 0001747.527 - circuit stats={'node': 22209, 'cell': 16576, 'fork': 5633, 'io': 108, 'line': 19876, 'comb': 16044, 'dff': 424, 'output': 70, 'input': 38, 'latch': 0, 'seq': 424}
+# 0001747.622 - line role stats={'none': 44, 'lout': 210, 'lseq': 17545, 'lout|lseq': 69, 'clk': 543, 'rst': 1465}
+# 0001748.273 - fault sites: 15100
+# 0001748.273 - uncollapsed stuck-at fault count: 30200
+# 0001748.273 - collapsed stuck-at fault count: 23782
+# 0001748.318 - FFR count: 2982
+# 0001748.835 - simple safsim.sim={name: "b15", sims: 1024, c_bytes: 3e6}
+# 0001787.885 : DS:118 NO:66 - 1% done 5s elapsed 10m40s remaining
+# 0001794.910 : DS:311 NO:131 - 2% done 12s elapsed 10m34s remaining
+# 0001804.913 : DS:569 NO:240 - 3% done 22s elapsed 10m25s remaining
+# 0001819.929 : DS:984 NO:377 - 6% done 37s elapsed 10m10s remaining
+# 0001841.956 : DS:1566 NO:606 - 9% done 59s elapsed 9m47s remaining
+# 0001874.960 : DS:2444 NO:941 - 14% done 1m32s elapsed 9m14s remaining
+# 0001923.985 : DS:3762 NO:1426 - 22% done 2m21s elapsed 8m25s remaining
+# 0001996.993 : DS:5691 NO:2184 - 33% done 3m34s elapsed 7m12s remaining
+# 0002106.006 : DS:8572 NO:3316 - 50% done 5m23s elapsed 5m23s remaining
+# 0002269.025 : DS:12932 NO:4966 - 75% done 8m6s elapsed 2m39s remaining
+# 0002428.728 - safsim.timers={sim: 645.86, sim_prop: 202.39, sim_eval: 155.34, sim_eval2: 133.71, startup: 34.03}
+# 0002428.728 - fsim performance: 6.05e+08 gfp/s
+# 0002428.728 - detected by simulation (collapsed): 17178/23782  -  72.23%
+```
+### incremental
+```
+# 0000000.836 W Cuda unavailable. Falling back to pure Python.
+# 0000016.056 - loading /nix/store/87l6ny2dcww3514v6wn292yli8ni0iz6-polito-itc99-b15-sky130/b15/nl/b15.nl.v ...
+# 0000018.065 - circuit stats={'node': 22209, 'cell': 16576, 'fork': 5633, 'io': 108, 'line': 19876, 'comb': 16044, 'dff': 424, 'output': 70, 'input': 38, 'latch': 0, 'seq': 424}
+# 0000018.139 - line role stats={'none': 44, 'lout': 210, 'lseq': 17545, 'lout|lseq': 69, 'clk': 543, 'rst': 1465}
+# 0000018.637 - fault sites: 15100
+# 0000018.637 - uncollapsed stuck-at fault count: 30200
+# 0000018.637 - collapsed stuck-at fault count: 23782
+# 0000018.680 - FFR count: 2982
+# 0000019.186 - incr safsim.sim={name: "b15", sims: 1024, c_bytes: 3e6}
+# 0000060.780 :  - 4% done 5s elapsed 2m12s remaining
+# 0000067.783 :  - 9% done 12s elapsed 2m5s remaining
+# 0000077.786 :  - 16% done 22s elapsed 1m55s remaining
+# 0000092.791 :  - 27% done 37s elapsed 1m40s remaining
+# 0000114.791 :  - 43% done 59s elapsed 1m18s remaining
+# 0000147.795 :  - 67% done 1m32s elapsed 45s remaining
+# 0000193.138 - safsim.timers={sim: 137.36, sim_incr_prop: 128.46, startup: 36.59, sim_incr_reset: 6.61, sim_incr_eval: 1.97, sim_full_prop: 0.01}
+# 0000193.138 - fsim performance: 2.84e+09 gfp/s
+# 0000193.138 - detected by simulation (collapsed): 17178/23782  -  72.23%
+```
+### PPSFP
+```
+# 0000000.587 W Cuda unavailable. Falling back to pure Python.
+# 0000004.636 - loading /nix/store/87l6ny2dcww3514v6wn292yli8ni0iz6-polito-itc99-b15-sky130/b15/nl/b15.nl.v ...
+# 0000006.500 - circuit stats={'node': 22209, 'cell': 16576, 'fork': 5633, 'io': 108, 'line': 19876, 'comb': 16044, 'dff': 424, 'output': 70, 'input': 38, 'latch': 0, 'seq': 424}
+# 0000006.574 - line role stats={'none': 44, 'lout': 210, 'lseq': 17545, 'lout|lseq': 69, 'clk': 543, 'rst': 1465}
+# 0000007.193 - fault sites: 15100
+# 0000007.193 - uncollapsed stuck-at fault count: 30200
+# 0000007.193 - collapsed stuck-at fault count: 23782
+# 0000007.236 - FFR count: 2982
+# 0000007.751 - ppsfp safsim.sim={name: "b15", sims: 1024, c_bytes: 3e6}
+# 0000050.606 :  - 9% done 5s elapsed 48s remaining
+# 0000057.607 :  - 74% done 12s elapsed 4s remaining
+# 0000057.977 - safsim.timers={startup: 37.85, sim: 12.37, sim_ffr_prop: 10.79, sim_ffr_reset: 0.63, sim_sens: 0.49, sim_ffr_out_reduce: 0.17, sim_full_prop: 0.01}
+# 0000057.977 - fsim performance: 3.16e+10 gfp/s
+# 0000057.977 - detected by simulation (collapsed): 17178/23782  -  72.23%
+
 ```
 ## C7552.bench on github
 ### simple
@@ -306,7 +374,20 @@ kyupy/tests/test_stil.py::test_b15
 ========================= 83 passed, 1 warning in 138.27s (0:02:18) =========================
 ```
 ### when builiding codespace from scratch 
-Run command `curl -LsSf https://astral.sh/uv/install.sh | sh` to ensure uv command run well
+Run command `curl -LsSf https:/        /astral.sh/uv/install.sh | sh` to ensure uv command run well
+
+### checking nix
+to run only inside the directory where flake.nix is located
+```
+which nix
+nix --version
+
+nix flake show
+
+nix develop --command bash -c "echo OK"
+
+uv run main.py polito-itc99-b15-sky130
+```
 
 # Github Codespace specs
 ## CPU
@@ -447,39 +528,3 @@ SEMMSL   Max semaphores per semaphore set.                        32000    -    
 SEMOPM   Max number of operations per semop(2)                      500    -     -
 SEMVMX   Semaphore max value                                      32767    -     -
 ```
-
-# Issues
-## Polito
-When running `uv run main.py polito-itc99-b15-sky130` terminal returns the following
-```
-# 0000000.316 W Cuda unavailable. Falling back to pure Python.
-Traceback (most recent call last):
-  File "/workspaces/VLSI-Testing/task_force/fsim/main.py", line 105, in <module>
-    main()
-    ~~~~^^
-  File "/workspaces/VLSI-Testing/task_force/fsim/main.py", line 33, in main
-    benchmark_path = Path(subprocess.check_output(nix_cmd.split(), text=True).strip())
-                          ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/codespace/.local/share/uv/python/cpython-3.13.14-linux-x86_64-gnu/lib/python3.13/subprocess.py", line 472, in check_output
-    return run(*popenargs, stdout=PIPE, timeout=timeout, check=True,
-           ~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-               **kwargs).stdout
-               ^^^^^^^^^
-  File "/home/codespace/.local/share/uv/python/cpython-3.13.14-linux-x86_64-gnu/lib/python3.13/subprocess.py", line 554, in run
-    with Popen(*popenargs, **kwargs) as process:
-         ~~~~~^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/codespace/.local/share/uv/python/cpython-3.13.14-linux-x86_64-gnu/lib/python3.13/subprocess.py", line 1039, in __init__
-    self._execute_child(args, executable, preexec_fn, close_fds,
-    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-                        pass_fds, cwd, env,
-                        ^^^^^^^^^^^^^^^^^^^
-    ...<5 lines>...
-                        gid, gids, uid, umask,
-                        ^^^^^^^^^^^^^^^^^^^^^^
-                        start_new_session, process_group)
-                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/codespace/.local/share/uv/python/cpython-3.13.14-linux-x86_64-gnu/lib/python3.13/subprocess.py", line 1991, in _execute_child
-    raise child_exception_type(errno_num, err_msg, err_filename)
-FileNotFoundError: [Errno 2] No such file or directory: 'nix'
-```
-issue remain even after installanig nix
