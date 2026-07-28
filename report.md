@@ -1,24 +1,31 @@
 Logs 
+# commands
+|command|description|
+|---|---|
+|uv run pytest|check correct configuration|
+|uv run main.py tests/c880.bench|running the circuit throught the simulation|
+
 # summary table
 For performance stats gfs/s = gates * faults * patterns/second
 |test|[Github](#github-codespace-specs)|[Local](#local-device)|
 |---|---|---|
-|c6288<br>SAFSimSimple|1.03e+09 gfp/s|7.68e+08 gfp/s|
-|c6288<br>SAFSimIncremental|2.73e+09 gfp/s|1.01e+09 gfp/s|
-|c6288<br>SAFSimPPSFP|1.21e+10 gfp/s|4.88e+09 gfp/s|
-|[polito-itc99-b15-sky130<br>SAFSimple](#simple-2)||6.05e+08 gfp/s|
-[polito-itc99-b15-sky130<br>SAFSimIncremental](#incremental-2)||2.84e+09 gfp/s|
-[polito-itc99-b15-sky130<br>SAFSimPPSFP](#ppsfp-2)||3.16e+10 gfp/s|
-|c7522<br>SAFSimSimple|7.86e+08 gfp/s|2.95e+08 gfp/s|
-|c7522<br>SAFSimIncremental|3.08e+09 gfp/s|1.09e+09 gfp/s|
-|c7522<br>SAFSimPPSFP|1.91e+10 gfp/s|6.95e+09 gfp/s|
-
+|c6288<br>SAFSimSimple|[1.03e+09 gfp/s](#simple-c6288bench-on-github-codespace)|[7.68e+08 gfp/s](#simple-c6288bench-on-local-device)|
+|c6288<br>SAFSimIncremental|[2.73e+09 gfp/s](#incremental-c6288bench-on-github-codespace)|[1.01e+09 gfp/s](#incremental-c6288bench-on-local-device)|
+|c6288<br>SAFSimPPSFP|[1.21e+10 gfp/s](#ppsfp-c6288bench-on-github-codespace)|[4.88e+09 gfp/s](#ppsfp-c6288bench-on-local-device)|
+|polito-itc99-b15-sky130<br>SAFSimple||[6.05e+08 gfp/s](#simple-polito-itc99-b15-sky130-on-local)|
+|polito-itc99-b15-sky130<br>SAFSimIncremental||[2.84e+09 gfp/s](#incremental-polito-itc99-b15-sky130-on-local)|
+|polito-itc99-b15-sky130<br>SAFSimPPSFP||[3.16e+10 gfp/s](#ppsfp-polito-itc99-b15-sky130-on-local)|
+|c7522<br>SAFSimSimple|[7.86e+08 gfp/s](#simple-c7552bench-on-github)|[2.95e+08 gfp/s](#simple-c7552bench-on-local-device)|
+|c7522<br>SAFSimIncremental|[3.08e+09 gfp/s](#incremental-c7552bench-on-github)|[1.09e+09 gfp/s](#incremental-c7552bench-on-local-device)|
+|c7522<br>SAFSimPPSFP|[1.91e+10 gfp/s](#ppsfp-c7552bench-on-github)|[6.95e+09 gfp/s](#ppsfp-c7552bench-on-local-device)|
+|c880<br>SAFSimSimple||[2.38e+08 gfp/s](#simple-c880bench-on-local-device)|
+|c880<br>SAFSimIncremental||[2.04e+09 gfp/s](#incremental-c880bench-on-local-device)|
+|c880<br>SAFSimPPSFP||[1.08e+10gfp/s](#ppsfp-c880bench-on-local-device)|
 
 
 
 # Logs 
-## C6288.bench on github codespace
-### simple 
+### simple C6288.bench on github codespace
 ```
 # 0000000.649 W Cuda unavailable. Falling back to pure Python.
 # 0000003.321 - loading tests/c6288.bench ...
@@ -35,7 +42,7 @@ For performance stats gfs/s = gates * faults * patterns/second
 # 0000045.925 - fsim performance: 1.03e+09 gfp/s
 # 0000045.925 - detected by simulation (collapsed): 7646/7680  -  99.56%
 ```
-### Incremental
+### Incremental C6288.bench on github codespace
 ```
 # 0000000.375 W Cuda unavailable. Falling back to pure Python.
 # 0000002.505 - loading tests/c6288.bench ...
@@ -51,7 +58,7 @@ For performance stats gfs/s = gates * faults * patterns/second
 # 0000028.565 - fsim performance: 2.73e+09 gfp/s
 # 0000028.565 - detected by simulation (collapsed): 7646/7680  -  99.56%
 ```
-### PPSFP
+### PPSFP C6288.bench on github codespace
 ```
 # 0000000.325 W Cuda unavailable. Falling back to pure Python.
 # 0000002.405 - loading tests/c6288.bench ...
@@ -65,9 +72,8 @@ For performance stats gfs/s = gates * faults * patterns/second
 # 0000022.989 - safsim.timers={startup: 18.71, sim: 1.57, sim_ffr_prop: 1.37, sim_ffr_reset: 0.06, sim_sens: 0.05, sim_ffr_out_reduce: 0.03, sim_full_prop: 0.00}
 # 0000022.989 - fsim performance: 1.21e+10 gfp/s
 # 0000022.989 - detected by simulation (collapsed): 7646/7680  -  99.56%
-```
-## C6288.bench on local device 
-### simple
+``` 
+### simple C6288.bench on local device
 ```
 # 0000000.529 W Cuda unavailable. Falling back to pure Python.
 # 0000002.747 - loading tests/c6288.bench ...
@@ -85,7 +91,7 @@ For performance stats gfs/s = gates * faults * patterns/second
 # 0000053.338 - fsim performance: 7.68e+08 gfp/s
 # 0000053.338 - detected by simulation (collapsed): 7646/7680  -  99.56%
 ```
-### incremental
+### incremental C6288.bench on local device
 ```
 # 0000000.738 W Cuda unavailable. Falling back to pure Python.
 # 0000004.677 - loading tests/c6288.bench ...
@@ -102,7 +108,7 @@ For performance stats gfs/s = gates * faults * patterns/second
 # 0000066.304 - fsim performance: 1.01e+09 gfp/s
 # 0000066.304 - detected by simulation (collapsed): 7646/7680  -  99.56%
 ```
-### ppsfp
+### ppsfp C6288.bench on local device
 ```
 # 0000000.583 W Cuda unavailable. Falling back to pure Python.
 # 0000004.596 - loading tests/c6288.bench ...
@@ -117,8 +123,7 @@ For performance stats gfs/s = gates * faults * patterns/second
 # 0000048.861 - fsim performance: 4.88e+09 gfp/s
 # 0000048.861 - detected by simulation (collapsed): 7646/7680  -  99.56%
 ```
-## polito itc99-b15-sky130 on local
-### simple
+### simple polito itc99-b15-sky130 on local
 ```
 # 0000000.982 W Cuda unavailable. Falling back to pure Python.
 # 0001745.539 - loading /nix/store/87l6ny2dcww3514v6wn292yli8ni0iz6-polito-itc99-b15-sky130/b15/nl/b15.nl.v ...
@@ -143,7 +148,7 @@ For performance stats gfs/s = gates * faults * patterns/second
 # 0002428.728 - fsim performance: 6.05e+08 gfp/s
 # 0002428.728 - detected by simulation (collapsed): 17178/23782  -  72.23%
 ```
-### incremental
+### incremental polito itc99-b15-sky130 on local
 ```
 # 0000000.836 W Cuda unavailable. Falling back to pure Python.
 # 0000016.056 - loading /nix/store/87l6ny2dcww3514v6wn292yli8ni0iz6-polito-itc99-b15-sky130/b15/nl/b15.nl.v ...
@@ -164,7 +169,7 @@ For performance stats gfs/s = gates * faults * patterns/second
 # 0000193.138 - fsim performance: 2.84e+09 gfp/s
 # 0000193.138 - detected by simulation (collapsed): 17178/23782  -  72.23%
 ```
-### PPSFP
+### PPSFP polito itc99-b15-sky130 on local
 ```
 # 0000000.587 W Cuda unavailable. Falling back to pure Python.
 # 0000004.636 - loading /nix/store/87l6ny2dcww3514v6wn292yli8ni0iz6-polito-itc99-b15-sky130/b15/nl/b15.nl.v ...
@@ -182,8 +187,7 @@ For performance stats gfs/s = gates * faults * patterns/second
 # 0000057.977 - detected by simulation (collapsed): 17178/23782  -  72.23%
 
 ```
-## C7552.bench on github
-### simple
+### simple C7552.bench on github
 ```
 # 0000000.529 W Cuda unavailable. Falling back to pure Python.
 # 0000003.104 - loading tests/c7552.bench ...
@@ -202,7 +206,7 @@ For performance stats gfs/s = gates * faults * patterns/second
 # 0000057.411 - fsim performance: 7.86e+08 gfp/s
 # 0000057.411 - detected by simulation (collapsed): 6893/7452  -  92.50%
 ```
-### incremental
+### incremental C7552.bench on github
 ```
 # 0000000.404 W Cuda unavailable. Falling back to pure Python.
 # 0000002.797 - loading tests/c7552.bench ...
@@ -219,7 +223,7 @@ For performance stats gfs/s = gates * faults * patterns/second
 # 0000032.689 - fsim performance: 3.08e+09 gfp/s
 # 0000032.689 - detected by simulation (collapsed): 6893/7452  -  92.50%
 ```
-### PPSFP
+### PPSFP C7552.bench on github
 ```
 # 0000000.508 W Cuda unavailable. Falling back to pure Python.
 # 0000003.157 - loading tests/c7552.bench ...
@@ -235,9 +239,7 @@ For performance stats gfs/s = gates * faults * patterns/second
 # 0000024.227 - fsim performance: 1.91e+10 gfp/s
 # 0000024.227 - detected by simulation (collapsed): 6893/7452  -  92.50%
 ```
-
-## C7552.bench on local device
-### Simple
+### Simple C7552.bench on local device
 ```
 # 0000000.573 W Cuda unavailable. Falling back to pure Python.
 # 0000004.258 - loading tests/c7552.bench ...
@@ -259,7 +261,7 @@ For performance stats gfs/s = gates * faults * patterns/second
 # 0000135.364 - fsim performance: 2.95e+08 gfp/s
 # 0000135.364 - detected by simulation (collapsed): 6893/7452  -  92.50%
 ```
-### Incremental
+### Incremental C7552.bench on local device
 ```
 # 0000001.148 W Cuda unavailable. Falling back to pure Python.
 # 0000005.550 - loading tests/c7552.bench ...
@@ -278,8 +280,7 @@ For performance stats gfs/s = gates * faults * patterns/second
 # 0000073.167 - fsim performance: 1.09e+09 gfp/s
 # 0000073.167 - detected by simulation (collapsed): 6893/7452  -  92.50%
 ```
-
-### PPSFP
+### PPSFP C7552.bench on local device
 ```
 # 0000000.733 W Cuda unavailable. Falling back to pure Python.
 # 0000004.889 - loading tests/c7552.bench ...
@@ -295,6 +296,49 @@ For performance stats gfs/s = gates * faults * patterns/second
 # 0000053.717 - fsim performance: 6.95e+09 gfp/s
 # 0000053.717 - detected by simulation (collapsed): 6893/7452  -  92.50%
 ```
+### simple C880.bench on local device
+```
+# 0000000.480 W Cuda unavailable. Falling back to pure Python.
+# 0000002.459 - loading tests/c880.bench ...
+# 0000002.486 - circuit stats={'node': 826, 'cell': 383, 'fork': 443, 'io': 86, 'line': 1112, 'comb': 383, 'dff': 0, 'latch': 0, 'seq': 0}
+# 0000002.488 - line role stats={'lout': 1112}
+# 0000002.504 - fault sites: 834
+# 0000002.505 - uncollapsed stuck-at fault count: 1668
+# 0000002.505 - collapsed stuck-at fault count: 850
+# 0000002.506 - FFR count: 125
+# 0000002.523 - simple safsim.sim={name: "tests/c880.bench", sims: 1024, c_bytes: 150e3}
+# 0000025.615 - safsim.timers={startup: 21.69, sim: 1.40, sim_eval2: 0.45, sim_eval: 0.28, sim_prop: 0.23}
+# 0000025.615 - fsim performance: 2.38e+08 gfp/s
+# 0000025.615 - detected by simulation (collapsed): 832/850  -  97.88%
+```
+### incremental C880.bench on local device
+```
+# 0000002.265 - line role stats={'lout': 1112}
+# 0000002.278 - fault sites: 834
+# 0000002.278 - uncollapsed stuck-at fault count: 1668
+# 0000002.278 - collapsed stuck-at fault count: 850
+# 0000002.280 - FFR count: 125
+# 0000002.297 - incr safsim.sim={name: "tests/c880.bench", sims: 1024, c_bytes: 150e3}
+# 0000024.588 - safsim.timers={startup: 22.13, sim: 0.16, sim_incr_prop: 0.14, sim_incr_eval: 0.01, sim_incr_reset: 0.01, sim_full_prop: 0.00}
+# 0000024.588 - fsim performance: 2.04e+09 gfp/s
+# 0000024.588 - detected by simulation (collapsed): 832/850  -  97.88%
+```
+### ppsfp C880.bench on local device
+```
+# 0000000.336 W Cuda unavailable. Falling back to pure Python.
+# 0000002.206 - loading tests/c880.bench ...
+# 0000002.231 - circuit stats={'node': 826, 'cell': 383, 'fork': 443, 'io': 86, 'line': 1112, 'comb': 383, 'dff': 0, 'latch': 0, 'seq': 0}
+# 0000002.234 - line role stats={'lout': 1112}
+# 0000002.245 - fault sites: 834
+# 0000002.245 - uncollapsed stuck-at fault count: 1668
+# 0000002.245 - collapsed stuck-at fault count: 850
+# 0000002.247 - FFR count: 125
+# 0000002.275 - ppsfp safsim.sim={name: "tests/c880.bench", sims: 1024, c_bytes: 150e3}
+# 0000023.344 - safsim.timers={startup: 21.04, sim: 0.03, sim_ffr_prop: 0.01, sim_sens: 0.01, sim_ffr_out_reduce: 0.00, sim_ffr_reset: 0.00, sim_full_prop: 0.00}
+# 0000023.344 - fsim performance: 1.08e+10 gfp/s
+# 0000023.344 - detected by simulation (collapsed): 832/850  -  97.88%
+```
+
 ## Installation ocurrences
 cloning repo
 ```
