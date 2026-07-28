@@ -13,19 +13,31 @@ Circuit: [ISCAS C880](https://tumbleweed.nu/r/iscas.restore/doc/trunk/c880.html)
 |C8| Carry out| 866
 
 # I/O and gates
-60 inputs (PI)
-26 outputs (PO)
-63 inverters 
-320 gates ( 117 ANDs + 87 NANDs + 29 ORs + 61 NORs + 26 buffers )
+- 60 inputs (PI)
+- 26 outputs (PO)
+- 63 inverters 
+- 320 gates 
+    - 117 ANDs 
+    - 87 NANDs
+    - 29 ORs 
+    - 61 NORs 
+    - 26 buffers
 ? fanouts
 
 # Total possible faults
-|Fault model|Total possible faults|Calculation|
-|---|---|---|
-|Stuck-At Faults(SAF)|
-|Transistor Faults|
-|Open and short faults|
+|Fault model|Total possible faults|Number of collapsed faults|Calculation total possible faults|Calculation collapsed faults|
+|---|:---:|:---:|:---:|:---:|
+|Stuck-At Faults(SAF)|1668|850||$`2*(PO+Number of fanouts)+total number of inputs - inverters`$
+|Transistor Faults||||$`2*T-T_s+G_s-T_p+G_p`$|
+|Open and short faults||||$`N-choose-2=N*\dfrac{(N-1)}{2}`$|
 |Delay Faults and crosstalk|
+
+> [!NOTE]
+> Where T=total number of trasnsitors
+> T_s = Total number of transistors in series
+> G_s = Total number of groups of transistors in series
+> T_p = Total number of transistors in parallel
+> G_p = total number of groups in parallel.
 
 # Controllability and observability
 
