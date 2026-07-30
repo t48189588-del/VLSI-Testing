@@ -1,6 +1,8 @@
 Circuit: [ISCAS C880](https://tumbleweed.nu/r/iscas.restore/doc/trunk/c880.html)
 ![c880_circuit](c880_circuit.png)
 
+Function: c880 is an 8-bit ALU with the high-level model shown in above. Given the presence of a CLA module in the 74181 ALU, it is not surprising to find a similar module in c880. The core of this 8-bit ALU is an 8-bit 74283-style adder. The multiplexers M1 and M6 are both controlled by module M2 in a fashion reminiscent of horizontal microcode; i.e., an external source must ensure that no more than one function is activated at a time on C(25:0).
+
 |I/O buses|Function|ISCAS-85 Netlist numbers|
 |---|---|---|
 |A[8:0]|Main A bus|91, 96, 101, 106, 111, 116, 121, 126, 268|
