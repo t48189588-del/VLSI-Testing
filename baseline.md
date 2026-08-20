@@ -15,31 +15,35 @@ Function: c880 is an 8-bit ALU with the high-level model shown in above. Given t
 |C8| Carry out| 866
 
 # I/O and gates
+[reference](https://www.scribd.com/document/285734640/AppendixA-ISCAS-Circuits)
 - 60 inputs (PI)
 - 26 outputs (PO)
-- 63 inverters 
-- 320 gates 
+- 383 logic gates
+    - 26 buffers
+    - 63 NOTs
     - 117 ANDs 
     - 87 NANDs
     - 29 ORs 
     - 61 NORs 
-    - 26 buffers
-? fanouts
+- 125 fanouts stems
+- 995 fanout lines
 
 # Total possible faults
 |Fault model|Total possible faults|Number of collapsed faults|Calculation total possible faults|Calculation collapsed faults|
 |---|:---:|:---:|:---:|:---:|
-|Stuck-At Faults(SAF)|1668|850||$`2*(PO+Number of fanouts)+total number of inputs - inverters`$
+|Stuck-At Faults(SAF)|<ul><li>1668</li><li>[1760](https://csit.am/2015/proceedings/DT/DT2.pdf)</li></ul>|<ul><li>850</li><li>[942](https://csit.am/2015/proceedings/DT/DT2.pdf)</li></ul>||$`2*(PO+Number of fanouts)+total number of inputs - inverters`$
 |Transistor Faults||||$`2*T-T_s+G_s-T_p+G_p`$|
 |Open and short faults||||$`N-choose-2=N*\dfrac{(N-1)}{2}`$|
 |Delay Faults and crosstalk|
 
 > [!NOTE]
-> Where T=total number of trasnsitors
-> T_s = Total number of transistors in series
-> G_s = Total number of groups of transistors in series
-> T_p = Total number of transistors in parallel
-> G_p = total number of groups in parallel.
+> <ul>
+<li> Where T=total number of trasnsitors</li>
+<li> T_s = Total number of transistors in series</li>
+<li> G_s = Total number of groups of transistors in series</li>
+<li> T_p = Total number of transistors in parallel</li>
+<li> G_p = total number of groups in parallel.</li>    
+> </ul>
 
 # Controllability and observability
 
