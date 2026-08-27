@@ -1,0 +1,3 @@
+Scenario,Total Faults,Detected Faults,Undetected Faults,Final Coverage (%),Coverage Curve Final (%),Avg Detecting Vectors/Fault,Median Detecting Vectors/Fault,Max Detecting Vectors/Fault,Total PO Mismatches
+Scenario 1 — Uniform Random,994,928,66,93.36016096579478,93.36016096579478,187.35991379310346,128.0,1022,203740
+Scenario 2B — Custom PO Weighted,994,922,72,92.75653923541248,92.75653923541248,189.3481561822126,128.0,1017,205738
